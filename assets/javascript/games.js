@@ -12,16 +12,17 @@ var eachofLetters = null;
 // Sets the computerGuess variable equal to a random choice from the computerChoice array.
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
+// function for the number of guesses left
 function countGuessesLeft() {
 	document.querySelector("#guessesLeft").innerHTML = "Guesses Left: " + guessesLeft;
 }
-
+// function containing the user guess
 function userGuessSoFar() {
 	document.querySelector("#letter").innerHTML = "Your Guesses so far: " + letterUser.join(' ');
 }
 
 countGuessesLeft();
-
+// restart function. It is a variable because it will be used multiple times
 var restart = function() {
 	guessesLeft = 10;
 	letterUser = [];
@@ -37,12 +38,15 @@ document.onkeyup = function(event) {
 	letterUser.push(userGuess);
 	countGuessesLeft();
 	userGuessSoFar();
-
+// the user wins if the guess is equal to computer guess
 	if (userGuess === computerGuess){
 		wins++;
+		// Get the innerHTML of the DOM element that has the id "win"
 		document.querySelector("#wins").innerHTML = "Wins: " + wins;
+		// call the restart method
 		restart();
 	} 
+	// The player losses if there are no more guessesleft
 	else if (guessesLeft === 0) {
 		losses++;
 		document.querySelector("#lose").innerHTML = "Loses: " + losses;
